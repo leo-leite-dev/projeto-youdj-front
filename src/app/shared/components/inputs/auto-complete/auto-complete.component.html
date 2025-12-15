@@ -1,0 +1,28 @@
+<div class="autocomplete" [class.disabled]="disabled">
+
+    <input matInput type="text" class="autocomplete-input" [formControl]="inputCtrl" [matAutocomplete]="auto"
+        [placeholder]="placeholder" [disabled]="disabled" (blur)="markTouched()" />
+
+    <mat-autocomplete #auto="matAutocomplete" panelClass="music-autocomplete-panel" (optionSelected)="select($event)">
+
+        <mat-option *ngFor="let option of (filtered$ | async) ?? []; trackBy: trackById" [value]="option">
+
+            <div class="video-row d-flex center gap-10">
+                <img class="video-thumb" [src]="option.thumbnailUrl" alt="thumbnail" />
+
+                <div class="video-info">
+                    <div class="video-title fs-14">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+
+        </mat-option>
+
+        <mat-option *ngIf="((filtered$ | async) ?? []).length === 0" disabled>
+            Nenhum resultado
+        </mat-option>
+
+    </mat-autocomplete>
+
+</div>

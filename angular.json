@@ -23,6 +23,11 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/shareds/styles"
+              ]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -60,37 +65,15 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
+            "development": {
+              "buildTarget": "youdj-front:build:development",
+              "proxyConfig": "proxy.conf.json"
+            },
             "production": {
               "buildTarget": "youdj-front:build:production"
-            },
-            "development": {
-              "buildTarget": "youdj-front:build:development"
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.scss"
-            ]
-          }
         }
       }
     }

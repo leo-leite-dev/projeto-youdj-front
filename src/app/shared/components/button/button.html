@@ -1,0 +1,11 @@
+<button class="btn" [ngClass]="[
+    'btn--' + variant,
+    loading ? 'is-loading' : '',
+    isDisabled ? 'is-disabled' : ''
+  ]" [attr.type]="type" [disabled]="isDisabled" [attr.aria-busy]="loading || null"
+    [attr.aria-disabled]="isDisabled || null" (click)="onClick($event)">
+    <span class="btn__content">
+        <span *ngIf="!loading">{{ label }}</span>
+        <span *ngIf="loading">Carregando…</span>
+    </span>
+</button>

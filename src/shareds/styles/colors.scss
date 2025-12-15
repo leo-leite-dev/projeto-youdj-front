@@ -1,0 +1,40 @@
+:root {
+        /* Base */
+        --color-white: #ffffff;
+        --color-black: #000000;
+
+        /* Background */
+        --bg-app-dark: #0d0d0d;
+        --bg-app-dark-soft: #1a1a1a;
+
+        /* Existing */
+        --bg-home-start: #0f0c29;
+        --bg-home-middle: #302b63;
+        --bg-home-end: #24243e;
+
+        --gradient-home: linear-gradient(160deg,
+                        var(--bg-home-start),
+                        var(--bg-home-middle),
+                        var(--bg-home-end));
+
+        --gradient-primary: linear-gradient(90deg,
+                        #8a2be2,
+                        #00e5ff);
+
+        /* Text */
+        --text-primary: var(--color-white);
+
+        /* Opacity */
+        --opacity-text-secondary: 0.85;
+        --opacity-text-muted: 0.6;
+
+        /* Surfaces */
+        --surface-card: rgba(20, 20, 20, 0.85);
+        --surface-input: #121212;
+        --surface-panel: #111111;
+
+        /* Effects */
+        --overlay-hover: rgba(255, 255, 255, 0.06);
+}
+
+$pure-white: white;
