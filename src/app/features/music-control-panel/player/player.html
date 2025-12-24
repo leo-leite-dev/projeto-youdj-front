@@ -1,0 +1,19 @@
+<div class="player-title text-center mb-5" *ngIf="current$ | async as current">
+    {{ current.title }}
+</div>
+
+<div class="player-border">
+    <div class="player-wrapper">
+
+        <div class="player-screen">
+            <div id="yt-player"></div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #idle>
+    <div class="player-idle">
+        🎵 Nenhuma música tocando agora
+    </div>
+</ng-template>

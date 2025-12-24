@@ -22,6 +22,10 @@
     justify-content: space-between;
 }
 
+.jc-end {
+    justify-content: flex-end;
+}
+
 .column {
     flex-direction: column;
 }
@@ -34,8 +38,16 @@
     align-items: flex-start;
 }
 
+.mt-10 {
+    margin-top: 10px;
+}
+
 .mt-20 {
     margin-top: 20px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
 }
 
 .mb-10 {
@@ -44,10 +56,6 @@
 
 .mb-20 {
     margin-bottom: 20px;
-}
-
-.mt-20 {
-    margin-top: 20px;
 }
 
 .gap-10 {

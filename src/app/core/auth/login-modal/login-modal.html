@@ -1,0 +1,53 @@
+<div class="modal-wrapper d-flex center jc-center" (click)="close.emit()">
+    <div class="overlay"></div>
+
+    <div class="modal-retro" (click)="$event.stopPropagation()" role="dialog" aria-modal="true"
+        aria-labelledby="login-title">
+        <button class="modal-close-btn" (click)="close.emit()" aria-label="Fechar">
+            <app-fa-icon icon="times" />
+        </button>
+
+        <div class="modal-header text-center mb-20 gap-5 mb-10">
+            <div class="brand d-flex column">
+                <span class="brand__badge">YOUDJ</span>
+                <span class="brand__scope">DJ CONTROL PANEL</span>
+            </div>
+
+            <h1 id="login-title" class="title">LOGIN</h1>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert--error">
+            {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form d-flex column gap-16">
+            <div class="field">
+                <app-input label="Usuário / E-mail" type="text" placeholder="DJ Name ou E-mail"
+                    formControlName="identify" />
+                <app-field-errors label="Usuário" [control]="form.get('identify')" />
+            </div>
+
+            <div class="field">
+                <app-input label="Senha" type="password" placeholder="Senha secreta" formControlName="password" />
+                <app-field-errors label="Senha" [control]="form.get('password')" />
+            </div>
+
+            <div class="mt-10 d-flex jc-end">
+                <app-submit-button label="ENTRAR NO SET" [loading]="loading" [disabled]="form.invalid" />
+            </div>
+        </form>
+
+        <div class="support">
+            <a class="support__link" (click)="navigateToRegister($event)">
+                Criar conta de DJ
+            </a>
+        </div>
+
+        <div class="support support--help">
+            <span class="support__text">Falhou o som?</span>
+            <a class="support__link" href="mailto:suporte@youdj.com">
+                Chamar técnico
+            </a>
+        </div>
+    </div>
+</div>

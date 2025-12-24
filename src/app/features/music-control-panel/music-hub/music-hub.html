@@ -1,0 +1,21 @@
+<div class="music-hub-header d-flex center jc-center">
+
+    <div class="hub-card mt-5">
+
+        <header class="hub-header text-center">
+            <h1>
+                Escolha sua música
+                <app-fa-icon [icon]="musicIcon" />
+            </h1>
+
+            <p>Peça sua música e deixe o DJ fazer a mágica</p>
+        </header>
+
+        <div class="hub-search d-flex jc-center">
+            <app-auto-complete [formControl]="songCtrl" [options]="options" [displayWith]="displayWith"
+                placeholder="Buscar música ou artista" (action)="onMusicAction($event)" />
+        </div>
+
+    </div>
+
+</div>

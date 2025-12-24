@@ -1,0 +1,21 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    input {
+        padding: 0.6rem 0.7rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+
+        &:disabled {
+            background: #f2f2f2;
+        }
+    }
+}

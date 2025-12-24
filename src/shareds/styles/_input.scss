@@ -1,0 +1,36 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    margin-bottom: 0.3rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ddd;
+  }
+
+  input,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #1e1e1e;
+    color: #fff;
+
+    &:focus {
+      outline: none;
+      border-color: #6a5acd;
+      box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.3);
+    }
+
+    &:disabled {
+      background-color: #333;
+      cursor: not-allowed;
+    }
+  }
+}

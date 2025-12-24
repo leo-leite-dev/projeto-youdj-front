@@ -1,4 +1,4 @@
-<div class="home d-flex column jc-space-between text-center ">
+<!-- <div class="home d-flex column jc-space-between text-center ">
 
     <section class="brand">
         <h1>YouDj</h1>
@@ -18,4 +18,30 @@
         <span>Conectado ao DJ do local 🎧</span>
     </footer>
 
+</div> -->
+
+<div class="home d-flex column jc-space-between text-center">
+
+    <section class="brand">
+        <h1>YouDj</h1>
+        <p class="subtitle">
+            Controle pedidos, gerencie a pista e conecte seu público
+        </p>
+    </section>
+
+    <section class="cta">
+        <app-button variant="primary" label="Entrar ou criar conta" (clicked)="openLoginModal()"></app-button>
+
+        <p class="info">
+            Painel exclusivo para DJs
+        </p>
+    </section>
+
+
+    <footer class="footer">
+        <span>Sua pista. Seu som. Seu controle 🎚️</span>
+    </footer>
+
 </div>
+
+<app-login-modal *ngIf="showLoginModal" (close)="showLoginModal = false" (loggedIn)="onLoginSuccess()" />

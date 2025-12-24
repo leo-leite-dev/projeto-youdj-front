@@ -1,0 +1,19 @@
+<button class="btn" [ngClass]="[
+    'btn--' + variant,
+    loading ? 'is-loading' : '',
+    isDisabled ? 'is-disabled' : ''
+  ]" [attr.type]="htmlType" [disabled]="isDisabled" [attr.aria-busy]="loading ? 'true' : null"
+  [attr.aria-disabled]="isDisabled ? 'true' : null" (click)="onClick($event)">
+  <span class="btn__content">
+    <!-- Prefixo: ícone, spinner, etc -->
+    <ng-content select="[btnPrefix]"></ng-content>
+
+    <!-- Label -->
+    <span class="btn__label">
+      {{ loading ? 'Carregando…' : label }}
+    </span>
+
+    <!-- Sufixo -->
+    <ng-content select="[btnSuffix]"></ng-content>
+  </span>
+</button>

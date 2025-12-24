@@ -10,7 +10,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
   templateUrl: './fa-icon.component.html',
 })
 export class FaIconComponent {
-  @Input({ required: true }) icon!: IconDefinition;
+  @Input({ required: true }) icon!: IconDefinition | string;
   @Input() className = '';
   @Input() spin = false;
   @Input() size?: 'xs' | 'sm' | 'lg' | '1x' | '2x' | '3x';

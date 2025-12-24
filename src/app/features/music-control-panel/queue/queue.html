@@ -1,0 +1,36 @@
+<div class="queue">
+
+  <h2>Fila de reprodução</h2>
+
+  <ng-container *ngIf="queue$ | async as queue; else empty">
+
+    <div
+      cdkDropList
+      class="queue-list"
+      [cdkDropListData]="queue"
+      (cdkDropListDropped)="drop($event)"
+    >
+
+      <div
+        *ngFor="let music of queue; trackBy: trackById"
+        cdkDrag
+        class="queue-item d-flex center gap-10"
+      >
+        <img [src]="music.thumbnailUrl" alt="thumb" />
+
+        <div class="queue-info d-flex column gap-6">
+          <strong>{{ music.title }}</strong>
+          <span>{{ music.source }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #empty>
+    <p class="queue-empty">Nenhuma música na fila ainda 🎧</p>
+  </ng-template>
+
+</div>

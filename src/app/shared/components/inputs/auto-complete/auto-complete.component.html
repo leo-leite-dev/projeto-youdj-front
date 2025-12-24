@@ -5,21 +5,43 @@
 
     <mat-autocomplete #auto="matAutocomplete" panelClass="music-autocomplete-panel" (optionSelected)="select($event)">
 
-        <mat-option *ngFor="let option of (filtered$ | async) ?? []; trackBy: trackById" [value]="option">
+        <mat-option *ngFor="let option of (filtered$ | async) ?? []; trackBy: trackById" [value]="option"
+            class="video-option">
 
             <div class="video-row d-flex center gap-10">
+
                 <img class="video-thumb" [src]="option.thumbnailUrl" alt="thumbnail" />
 
                 <div class="video-info">
+
                     <div class="video-title fs-14">
                         {{ option.name }}
                     </div>
-                </div>
-            </div>
 
+                    <div class="video-actions d-flex gap-8 mt-5">
+
+                        <button mat-icon-button type="button" title="Adicionar à playlist"
+                            (click)="onAction(option, 'playlist', $event)">
+                            <mat-icon>playlist_add</mat-icon>
+                        </button>
+
+                        <button mat-icon-button type="button" title="Adicionar à fila"
+                            (click)="onAction(option, 'queue', $event)">
+                            <mat-icon>queue_music</mat-icon>
+                        </button>
+
+                        <button mat-icon-button type="button" title="Tocar agora"
+                            (click)="onAction(option, 'play', $event)">
+                            <mat-icon>play_arrow</mat-icon>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
         </mat-option>
 
-        <mat-option *ngIf="((filtered$ | async) ?? []).length === 0" disabled>
+        <mat-option *ngIf="((filtered$ | async) ?? []).length === 0" disabled class="empty-option">
             Nenhum resultado
         </mat-option>
 

@@ -1,40 +1,96 @@
 :root {
-        /* Base */
-        --color-white: #ffffff;
-        --color-black: #000000;
+   /* =========================
+     BASE
+     ========================= */
+   --color-white: #ffffff;
+   --color-black: #000000;
 
-        /* Background */
-        --bg-app-dark: #0d0d0d;
-        --bg-app-dark-soft: #1a1a1a;
+   /* =========================
+     BRAND / ACCENT
+     ========================= */
+   --color-purple-base: #6e30ff;
+   --color-purple-soft: rgba(110, 48, 255, 0.18);
+   --color-purple-soft-weak: rgba(110, 48, 255, 0.12);
 
-        /* Existing */
-        --bg-home-start: #0f0c29;
-        --bg-home-middle: #302b63;
-        --bg-home-end: #24243e;
+   --color-cyan-base: #00ffff;
+   --color-cyan-soft: rgba(0, 255, 255, 0.25);
 
-        --gradient-home: linear-gradient(160deg,
-                        var(--bg-home-start),
-                        var(--bg-home-middle),
-                        var(--bg-home-end));
+   --color-red-base: #ff3030;
 
-        --gradient-primary: linear-gradient(90deg,
-                        #8a2be2,
-                        #00e5ff);
+   /* =========================
+     TEXT
+     ========================= */
+   --text-primary: #e9ecf1;
+   --text-muted: #a7afbe;
+   --opacity-text-secondary: 0.85;
+   --opacity-text-muted: 0.6;
 
-        /* Text */
-        --text-primary: var(--color-white);
+   /* =========================
+     BACKGROUND CORE
+     ========================= */
+   --bg-app-dark: #0d0d0d;
+   --bg-app-dark-soft: #1a1a1a;
 
-        /* Opacity */
-        --opacity-text-secondary: 0.85;
-        --opacity-text-muted: 0.6;
+   --bg-dark-top: rgba(5, 0, 15, 0.85);
+   --bg-dark-bottom: rgba(0, 0, 0, 0.9);
 
-        /* Surfaces */
-        --surface-card: rgba(20, 20, 20, 0.85);
-        --surface-input: #121212;
-        --surface-panel: #111111;
+   /* =========================
+     GLOWS
+     ========================= */
+   --glow-purple-strong: rgba(180, 0, 255, 0.35);
+   --glow-cyan-soft: rgba(0, 255, 255, 0.25);
 
-        /* Effects */
-        --overlay-hover: rgba(255, 255, 255, 0.06);
+   /* =========================
+     GRADIENTS
+     ========================= */
+   --gradient-radial-purple:
+      radial-gradient(800px 400px at 15% -10%,
+         var(--glow-purple-strong),
+         transparent 60%);
+
+   --gradient-radial-cyan:
+      radial-gradient(900px 500px at 110% 120%,
+         var(--glow-cyan-soft),
+         transparent 60%);
+
+   --gradient-bg-dark:
+      linear-gradient(180deg,
+         var(--bg-dark-top),
+         var(--bg-dark-bottom));
+
+
+
+   /* =========================
+     SURFACES
+     ========================= */
+   --surface-card: rgba(20, 20, 20, 0.85);
+   --surface-input: #121212;
+   --surface-panel: #111111;
+
+   /* =========================
+     OVERLAYS & EFFECTS
+     ========================= */
+   --overlay-backdrop: rgba(0, 0, 0, 0.58);
+   --overlay-highlight-light: rgba(255, 255, 255, 0.03);
+   --overlay-hover: rgba(255, 255, 255, 0.06);
 }
 
-$pure-white: white;
+$text: #e9ecf1;
+$muted: #a7afbe;
+
+$cyan-pure: #0ff;
+$white-pure: #fff;
+$red-pure: rgb(255, 0, 0);
+$black-pure: rgb(0, 0, 0);
+
+$rose-accent-soft: rgba(255, 0, 80, 0.15);
+$rose-accent-border: rgba(255, 0, 80, 0.4);
+
+$white-soft: rgba(255, 255, 255, 0.6);
+
+$neon-purple-border-color: rgba(180, 0, 255, 0.35);
+$accent-purple-shadow : 0 0 25px rgba(180, 0, 255, 0.45),
+0 0 80px rgba(0, 255, 255, 0.15),
+inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+$cyan-shadow: rgba(0, 255, 255, 0.35);

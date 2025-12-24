@@ -1,0 +1,9 @@
+<div class="input-wrapper">
+    <label [for]="id">
+        {{ label }}
+        <span *ngIf="required">*</span>
+    </label>
+
+    <input [id]="id" [type]="type" [placeholder]="placeholder" [required]="required" [disabled]="disabled"
+        [value]="value ?? ''" (input)="handleChange($event)" (blur)="handleBlur()" />
+</div>

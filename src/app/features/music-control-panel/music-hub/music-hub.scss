@@ -1,0 +1,66 @@
+@use 'colors' as *;
+
+.music-hub-header {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    font-family: 'Orbitron', 'Rajdhani', system-ui, sans-serif;
+
+    .hub-card {
+        width: 100%;
+        max-width: 720px;
+        padding: 12px;
+        border-radius: 16px;
+
+        background: linear-gradient(180deg,
+                rgba(20, 10, 40, 0.85),
+                rgba(10, 5, 20, 0.95));
+
+        border: 1px solid $neon-purple-border-color;
+        backdrop-filter: blur(12px) saturate(130%);
+        box-shadow: $accent-purple-shadow ;
+
+        .hub-header {
+
+            h1 {
+                margin: 0;
+                font-size: 1.4rem;
+                letter-spacing: 0.2em;
+                font-weight: 600;
+
+                text-shadow:
+                    0 0 10px rgba(180, 0, 255, 0.9),
+                    0 0 18px rgba(180, 0, 255, 0.4);
+
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+
+                app-fa-icon {
+                    color: $cyan-pure;
+                    font-size: 1.2rem;
+                    filter: drop-shadow(0 0 6px $cyan-pure);
+                }
+            }
+
+            p {
+                margin-top: 4px;
+                font-size: 0.65rem;
+                letter-spacing: 0.15em;
+                color: $muted;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .hub-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .hub-card {
+        padding: 14px 16px;
+    }
+}
