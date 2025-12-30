@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
 
 /* ===============================
-   RESET E BASE
+   RESET
 ================================ */
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* SEM scroll global */
 }
 
 * {
@@ -15,32 +13,34 @@ body {
 }
 
 /* ===============================
-   APP ROOT
+   ROOT
 ================================ */
-.music-app {
+.app-root {
   height: 100vh;
   width: 100vw;
 
   display: flex;
   flex-direction: column;
 
-  background: radial-gradient(circle at top, #1b0033 0%, #050008 75%);
   font-family: 'Orbitron', sans-serif;
   color: #ffffff;
+
+  background: radial-gradient(circle at top, #1b0033 0%, #050008 75%);
+  overflow: hidden;
 }
 
 /* ===============================
-   HEADER (ALTURA FIXA)
+   HEADER
 ================================ */
-.music-header {
-  height: 150px; /* FIXO */
+.app-header {
+  height: 150px;
   flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
 
   background: linear-gradient(180deg, #2a004f, #12001f);
   border-bottom: 1px solid rgba(180, 0, 255, 0.4);
@@ -50,37 +50,66 @@ body {
     inset 0 -12px 20px rgba(0, 0, 0, 0.6);
 }
 
-.music-header app-music-hub {
-  width: 100%;
-  max-width: 720px;
-}
-
 /* ===============================
-   MAIN (OCUPA RESTO DA TELA)
+   BODY (3 COLUNAS)
 ================================ */
-.music-main {
-  flex: 1; /* ocupa tudo abaixo do header */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.app-body {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
   gap: 1.5rem;
 
   padding: 1.5rem;
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 /* ===============================
-   PLAYER (TAMANHO FIXO)
+   SIDEBAR ESQUERDA (PLAYLIST)
 ================================ */
-.music-player {
-  width: 100%;
-  max-width: 640px;
-  height: 360px;
+.sidebar-left {
+  padding: 1rem;
+  overflow-y: auto;
 
-  flex-shrink: 0;
+  background: linear-gradient(180deg, #080016, #04000c);
+  border-radius: 18px;
 
-  padding: 0;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.35),
+    inset 0 0 15px rgba(0, 255, 255, 0.15);
+}
 
+/* ===============================
+   SIDEBAR DIREITA (FUTURO)
+================================ */
+.sidebar-right {
+  padding: 1rem;
+
+  background: linear-gradient(180deg, #080016, #04000c);
+  border-radius: 18px;
+
+  border: 1px solid rgba(120, 0, 255, 0.35);
+  box-shadow:
+    0 0 25px rgba(120, 0, 255, 0.35),
+    inset 0 0 15px rgba(120, 0, 255, 0.15);
+}
+
+/* ===============================
+   CONTEÚDO CENTRAL
+================================ */
+.center-content {
+  display: grid;
+  grid-template-rows: 360px 1fr;
+  gap: 1.5rem;
+
+  overflow: hidden;
+}
+
+/* ===============================
+   PLAYER (TÍTULO + VÍDEO JUNTOS)
+================================ */
+.player-wrapper {
   background: linear-gradient(135deg, #05000f, #0d0020);
   border-radius: 20px;
 
@@ -89,62 +118,58 @@ body {
   justify-content: center;
 
   border: 1px solid rgba(0, 255, 255, 0.4);
-
   box-shadow:
     0 0 35px rgba(0, 255, 255, 0.45),
     inset 0 0 18px rgba(0, 255, 255, 0.15);
 
-  overflow: visible; /* 🔑 ESSA LINHA */
+  overflow: hidden;
 }
 
-.music-player iframe,
-.music-player video {
+/* Garante que o app-player ocupe tudo */
+.player-wrapper app-player {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-  background: #000;
 }
 
 /* ===============================
-   FILA (SCROLL INTERNO)
+   LISTA DE REPRODUÇÃO
 ================================ */
-.music-queue {
-  width: 100%;
-  max-width: 640px;
-  flex: 1; /* ocupa o resto da área */
-  overflow-y: auto; /* SCROLL SÓ AQUI */
-
+.queue-wrapper {
   padding: 1.5rem;
+  overflow-y: auto;
 
   background: linear-gradient(135deg, #080016, #04000c);
   border-radius: 18px;
 
   border: 1px solid rgba(120, 0, 255, 0.35);
-
   box-shadow:
     0 0 28px rgba(120, 0, 255, 0.4),
     inset 0 0 14px rgba(120, 0, 255, 0.15);
 }
 
-/* Scroll estilizado (opcional, mas lindo) */
-.music-queue::-webkit-scrollbar {
+/* ===============================
+   SCROLL ESTILIZADO
+================================ */
+.sidebar-left::-webkit-scrollbar,
+.queue-wrapper::-webkit-scrollbar {
   width: 8px;
 }
 
-.music-queue::-webkit-scrollbar-thumb {
+.sidebar-left::-webkit-scrollbar-thumb,
+.queue-wrapper::-webkit-scrollbar-thumb {
   background: linear-gradient(#00ffff, #9a00ff);
   border-radius: 4px;
 }
 
 /* ===============================
-   RESPONSIVO (SEM QUEBRAR REGRA)
+   RESPONSIVO
 ================================ */
-@media (max-width: 768px) {
-  .music-header {
-    height: 130px;
+@media (max-width: 1024px) {
+  .app-body {
+    grid-template-columns: 220px 1fr;
   }
 
-  .music-player {
-    height: 280px;
+  .sidebar-right {
+    display: none;
   }
 }

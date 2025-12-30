@@ -1,5 +1,7 @@
 export interface LoginResponse {
     djId: string;
-    isDj: boolean;
+    playlistId: string;
+    accessToken: string;
     expiresAtUtc: string;
+    isDj: boolean;
 }

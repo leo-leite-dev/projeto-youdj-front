@@ -1,0 +1,20 @@
+<section class="folders">
+
+    <div class="folder create" *ngIf="!isCreating" (click)="startCreate()">
+        <span class="icon">📁</span>
+        <span class="label">Nova Playlist</span>
+    </div>
+
+    <div class="folder editing" *ngIf="isCreating">
+        <span class="icon">📁</span>
+
+        <input type="text" autofocus [(ngModel)]="folderName" (keyup.enter)="confirmCreate()"
+            (keyup.escape)="cancelCreate()" (blur)="cancelCreate()" placeholder="Nome da pasta" />
+    </div>
+
+    <div class="folder" *ngFor="let folder of folders$ | async">
+        <span class="icon">📁</span>
+        <span class="label">{{ folder.name }}</span>
+    </div>
+
+</section>
