@@ -22,15 +22,12 @@ export class AuthService {
   }
 
   me(): Observable<LoginResponse> {
-    return this.http.get<LoginResponse>(
-      `${this.baseUrl}/me`,
-      { withCredentials: true }
-    );
+    return this.http.get<LoginResponse>(`${this.baseUrl}/me`);
   }
 
   logout(): Observable<void> {
     return this.http
-      .post<void>(`${this.baseUrl}/logout`, {}, { withCredentials: true })
+      .post<void>(`${this.baseUrl}/logout`, {})
       .pipe(
         tap(() => this.session.clear())
       );

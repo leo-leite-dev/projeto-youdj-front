@@ -1,9 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
 import { App } from './app/app';
 import { appConfig } from './app/app.config';
+
 import { registerIcons } from './shareds/icons/fontawesome.icon';
 import { initSession } from './app/core/auth/init-session';
 import { AuthService } from './app/core/auth/services/auth.service';
@@ -13,7 +14,6 @@ bootstrapApplication(App, {
   ...appConfig,
   providers: [
     ...appConfig.providers,
-    provideHttpClient(),
 
     {
       provide: APP_INITIALIZER,
