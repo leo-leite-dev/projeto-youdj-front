@@ -1,12 +1,11 @@
 {
-    "version": 2,
-    "framework": "angular",
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist/youdj-front",
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/youdj-front/browser",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
