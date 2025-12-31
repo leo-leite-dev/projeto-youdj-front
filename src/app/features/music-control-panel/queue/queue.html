@@ -1,21 +1,19 @@
 <div class="queue">
 
-  <h2>Fila de reprodução</h2>
+  <div class="queue-header">
+    <h2>Fila de reprodução</h2>
+
+    <!-- <button class="dj-extension-btn" type="button" aria-label="Convidar DJ" (click)="openDjExtensionModal()">
+      🔗
+    </button> -->
+  </div>
 
   <ng-container *ngIf="queue$ | async as queue; else empty">
 
-    <div
-      cdkDropList
-      class="queue-list"
-      [cdkDropListData]="queue"
-      (cdkDropListDropped)="drop($event)"
-    >
+    <div cdkDropList class="queue-list" [cdkDropListData]="queue" (cdkDropListDropped)="drop($event)">
 
-      <div
-        *ngFor="let music of queue; trackBy: trackById"
-        cdkDrag
-        class="queue-item d-flex center gap-10"
-      >
+      <div *ngFor="let music of queue; trackBy: trackById" cdkDrag class="queue-item d-flex center gap-10">
+
         <img [src]="music.thumbnailUrl" alt="thumb" />
 
         <div class="queue-info d-flex column gap-6">
@@ -33,4 +31,8 @@
     <p class="queue-empty">Nenhuma música na fila ainda 🎧</p>
   </ng-template>
 
+</div>
+
+<div class="toast" [class.show]="toastVisible">
+  {{ toastMessage }}
 </div>

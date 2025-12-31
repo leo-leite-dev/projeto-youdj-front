@@ -1,9 +1,9 @@
+@use 'colors' as *;
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
 
-/* ===============================
-   RESET
-================================ */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -89,7 +89,7 @@ html, body {
   background: linear-gradient(180deg, #080016, #04000c);
   border-radius: 18px;
 
-  border: 1px solid rgba(120, 0, 255, 0.35);
+  border: 1px solid $violet-neon-soft;
   box-shadow:
     0 0 25px rgba(120, 0, 255, 0.35),
     inset 0 0 15px rgba(120, 0, 255, 0.15);
@@ -141,7 +141,7 @@ html, body {
   background: linear-gradient(135deg, #080016, #04000c);
   border-radius: 18px;
 
-  border: 1px solid rgba(120, 0, 255, 0.35);
+  border: 1px solid $violet-neon-soft;
   box-shadow:
     0 0 28px rgba(120, 0, 255, 0.4),
     inset 0 0 14px rgba(120, 0, 255, 0.15);
@@ -171,5 +171,45 @@ html, body {
 
   .sidebar-right {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+
+  .center-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .player-wrapper {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .queue-wrapper {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow-y: auto;
+    display: block;
   }
 }

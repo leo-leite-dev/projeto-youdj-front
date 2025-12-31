@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { QueueService } from './services/queue.service';
 import { QueueItem } from './models/queue-item.mode';
+import { DjExtensionService } from '../../../shared/services/dj-extension.service';
 
 @Component({
   selector: 'app-queue',
@@ -14,9 +15,13 @@ import { QueueItem } from './models/queue-item.mode';
 })
 export class QueueComponent implements OnInit {
 
+  private readonly queueService = inject(QueueService);
+  private readonly djExtensionService = inject(DjExtensionService);
+
   queue$!: Observable<QueueItem[]>;
 
-  constructor(private readonly queueService: QueueService) { }
+  toastVisible = false;
+  toastMessage = '';
 
   ngOnInit(): void {
     this.queue$ = this.queueService.queue$;
@@ -32,6 +37,29 @@ export class QueueComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  openDjExtensionModal(): void {
+    this.djExtensionService.generateLink()
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => this.copyAndNotify(res.url)
+      });
+  }
+
+  private copyAndNotify(link: string): void {
+    navigator.clipboard.writeText(link);
+
+    this.showToast('Link copiado 🎉');
+  }
+
+  private showToast(message: string): void {
+    this.toastMessage = message;
+    this.toastVisible = true;
+
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2200);
   }
 
   trackById(_: number, item: QueueItem): string {

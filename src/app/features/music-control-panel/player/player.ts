@@ -7,6 +7,10 @@ import { SessionService } from '../../../core/auth/services/session.service';
 import { CurrentPlayingResponse } from './contracts/current-playing-response';
 import { YouTubeService } from './services/youtube.serivce';
 
+interface YouTubePlayerWithSize extends YT.Player {
+  setSize(width: number, height: number): void;
+}
+
 @Component({
   selector: 'app-player',
   standalone: true,
@@ -23,10 +27,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  private ytPlayer?: YT.Player;
-  private djId!: string;
+  private ytPlayer?: YouTubePlayerWithSize;
   private playerReady = false;
   private pendingVideoId?: string;
+  private djId!: string;
 
   readonly current$ = new BehaviorSubject<CurrentPlayingResponse | null>(null);
 
@@ -34,6 +38,61 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.initYouTubePlayer();
     this.initPlayerEffect();
   }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', this.resizePlayer);
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private initYouTubePlayer(): void {
+    if (this.ytPlayer)
+      return;
+
+    this.youtube.loadApi()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.ytPlayer = new window.YT.Player('yt-player', {
+          playerVars: {
+            autoplay: 1,
+            controls: 1,
+            playsinline: 1
+          },
+          events: {
+            onReady: () => {
+              this.playerReady = true;
+
+              this.resizePlayer();
+              window.addEventListener('resize', this.resizePlayer);
+
+              if (this.pendingVideoId) {
+                this.ytPlayer!.loadVideoById(this.pendingVideoId);
+                this.pendingVideoId = undefined;
+              }
+            },
+            onStateChange: (event: YT.OnStateChangeEvent) => {
+              if (event.data === YT.PlayerState.ENDED) {
+                this.onVideoEnded();
+              }
+            }
+          }
+        }) as YouTubePlayerWithSize;
+      });
+  }
+
+  private resizePlayer = (): void => {
+    if (!this.ytPlayer) 
+      return;
+
+    const container = document.querySelector('.player-screen') as HTMLElement;
+    if (!container) 
+      return;
+
+    const width = container.clientWidth;
+    const height = Math.round(width * 9 / 16);
+
+    this.ytPlayer.setSize(width, height);
+  };
 
   private initPlayerEffect(): void {
     this.session.djId$
@@ -71,39 +130,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
       this.pendingVideoId = current.externalId;
   }
 
-  private initYouTubePlayer(): void {
-
-    if (this.ytPlayer)
-      return;
-
-    this.youtube.loadApi()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-
-        this.ytPlayer = new window.YT.Player('yt-player', {
-          playerVars: {
-            autoplay: 1,
-            controls: 1
-          },
-          events: {
-            onReady: () => {
-              this.playerReady = true;
-
-              if (this.pendingVideoId) {
-                this.ytPlayer!.loadVideoById(this.pendingVideoId);
-                this.pendingVideoId = undefined;
-              }
-            },
-            onStateChange: (event: YT.OnStateChangeEvent) => {
-              if (event.data === YT.PlayerState.ENDED) {
-                this.onVideoEnded();
-              }
-            }
-          }
-        });
-      });
-  }
-
   private onVideoEnded(): void {
     this.playerService.finishPlaying()
       .pipe(
@@ -115,10 +141,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
