@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { YoutubeSearchResult, YoutubeVideo } from '../models/music-hub.models';
-import { environment } from '../../../../../environments/environments';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class MusicHubService {

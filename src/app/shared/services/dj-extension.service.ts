@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ErrorHandlingService } from "./error-handling.service";
-import { environment } from "../../../environments/environments";
+import { environment } from "../../../environments/environment";
 
 export interface GenerateDjExtensionResponse {
     url: string;
