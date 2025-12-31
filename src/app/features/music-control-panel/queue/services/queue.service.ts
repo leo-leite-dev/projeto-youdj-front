@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { environment } from "../../../environments/environments";
+import { environment } from "../../../../../environments/environments";
 import { ErrorHandlingService } from "../../../../shared/services/error-handling.service";
 import { AddMusicToQueueRequest } from "../contracts/add-music-to-queue-request";
 import { QueueItem } from "../models/queue-item.mode";
