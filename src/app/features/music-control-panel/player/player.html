@@ -2,11 +2,15 @@
     {{ current.title }}
 </div>
 
-<div class="player-border">
+<div class="player-border" *ngIf="current$ | async as current; else idle">
     <div class="player-inner">
 
         <div class="player-screen">
             <div id="yt-player"></div>
+
+            <button class="player-play" type="button" (click)="play()" aria-label="Play">
+                ▶
+            </button>
         </div>
 
     </div>

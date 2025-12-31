@@ -9,6 +9,8 @@ import { YouTubeService } from './services/youtube.serivce';
 
 interface YouTubePlayerWithSize extends YT.Player {
   setSize(width: number, height: number): void;
+  cueVideoById(videoId: string): void;
+  playVideo(): void;
 }
 
 @Component({
@@ -32,6 +34,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   private pendingVideoId?: string;
   private djId!: string;
 
+  private userInteracted = false;
+
   readonly current$ = new BehaviorSubject<CurrentPlayingResponse | null>(null);
 
   ngOnInit(): void {
@@ -46,17 +50,18 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   private initYouTubePlayer(): void {
-    if (this.ytPlayer)
-      return;
+    if (this.ytPlayer) return;
 
     this.youtube.loadApi()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.ytPlayer = new window.YT.Player('yt-player', {
           playerVars: {
-            autoplay: 1,
+            autoplay: 0,
             controls: 1,
-            playsinline: 1
+            playsinline: 1,
+            rel: 0,
+            modestbranding: 1
           },
           events: {
             onReady: () => {
@@ -66,7 +71,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
               window.addEventListener('resize', this.resizePlayer);
 
               if (this.pendingVideoId) {
-                this.ytPlayer!.loadVideoById(this.pendingVideoId);
+                this.ytPlayer!.cueVideoById(this.pendingVideoId);
                 this.pendingVideoId = undefined;
               }
             },
@@ -81,11 +86,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   private resizePlayer = (): void => {
-    if (!this.ytPlayer) 
+    if (!this.ytPlayer)
       return;
 
     const container = document.querySelector('.player-screen') as HTMLElement;
-    if (!container) 
+    if (!container)
       return;
 
     const width = container.clientWidth;
@@ -123,11 +128,22 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     this.current$.next(current);
 
-    if (this.playerReady && this.ytPlayer)
-      this.ytPlayer.loadVideoById(current.externalId);
+    if (this.playerReady && this.ytPlayer) {
+      this.ytPlayer.cueVideoById(current.externalId);
 
-    else
+      if (this.userInteracted) {
+        this.ytPlayer.playVideo();
+      }
+    } else {
       this.pendingVideoId = current.externalId;
+    }
+  }
+
+  play(): void {
+    if (!this.ytPlayer) return;
+
+    this.userInteracted = true;
+    this.ytPlayer.playVideo();
   }
 
   private onVideoEnded(): void {
